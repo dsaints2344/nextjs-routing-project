@@ -1,9 +1,13 @@
 import { FC } from 'react';
-
+import EventList from '../components/events/event-list';
+import { getFeaturedEvents } from './api/dummy-data';
+ 
 const HomePage: FC = () => {
-    return <div>
-        This is the events page home page
-    </div>
+    const featuredEvents = getFeaturedEvents();
+
+    return <ul>
+        <EventList events={featuredEvents}/>
+    </ul>
 }
 
 export default HomePage;

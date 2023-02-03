@@ -1,4 +1,6 @@
-const DUMMY_EVENTS = [
+import { IEvent } from '../../types/events';
+
+const DUMMY_EVENTS: IEvent[] = [
     {
       id: 'e1',
       title: 'Programming for everyone',

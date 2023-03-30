@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 import { IEvent } from '../../types/events';
 import classess from '../../styles/event-item.module.css';
+import Button from '../ui/button';
 
 const EventItem: FC<IEvent> = (props) => {
     const { id, title, description, location, date, image, isFeatured } = props;
@@ -28,7 +29,7 @@ const EventItem: FC<IEvent> = (props) => {
                 </div>
 
                 <div className={classess.actions}>
-                    <Link href={exploreLink}>Explore Event</Link>
+                    <Button link={exploreLink}>Explore Event</Button>
                 </div>
             </div>
         </li>

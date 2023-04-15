@@ -1,12 +1,14 @@
-import { FC } from 'react';
+import { FC } from "react";
+import { getAllEvents } from "../api/dummy-data";
+import EventList from "../../components/events/event-list";
 
 const EventsPage: FC = () => {
-    return (
-        <div>
-            Events Page
-        </div>
-    );
+  const events = getAllEvents();
+  return (
+    <div>
+      <EventList events={events} />
+    </div>
+  );
 };
-
 
 export default EventsPage;

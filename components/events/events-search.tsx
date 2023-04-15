@@ -1,8 +1,12 @@
-import { FC } from "react";
+import { FC, FormEvent, useRef } from "react";
 import Button from "../ui/button";
 import classes from "./event-search.module.css";
 
-const EventsSearch: FC = () => {
+interface Props {
+  onSearch?: (year: string, month: string) => void;
+}
+
+const EventsSearch: FC<Props> = ({ onSearch }) => {
   const months = [
     { name: "January", calendarNumber: 1 },
     { name: "February", calendarNumber: 2 },
@@ -17,20 +21,30 @@ const EventsSearch: FC = () => {
     { name: "November", calendarNumber: 11 },
     { name: "December", calendarNumber: 12 },
   ];
+  const yearInputRef = useRef<HTMLSelectElement>(null);
+  const monthInputRef = useRef<HTMLSelectElement>(null);
+  const submitHandler = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
+    const selectedYear = yearInputRef.current?.value;
+    const selectedMonth = monthInputRef.current?.value;
+    if (onSearch) {
+      onSearch(selectedYear!, selectedMonth!);
+    }
+  };
   return (
-    <form className={classes.form}>
+    <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.controls}>
         <div className={classes.control}>
           <label htmlFor="year">Year</label>
-          <select id="year">
+          <select id="year" ref={yearInputRef}>
             <option value="2021">2021</option>
             <option value="2022">2022</option>
           </select>
         </div>
         <div className={classes.control}>
           <label htmlFor="month">Month</label>
-          <select id="month">
+          <select id="month" ref={monthInputRef}>
             {months.map((month, key) => {
               return (
                 <option value={month.calendarNumber} key={key}>
